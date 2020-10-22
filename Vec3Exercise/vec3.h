@@ -9,7 +9,7 @@ struct Vec3
 
 	Vec3(const Vec3<T>& other) : Vec3(other.x, other.y, other.z) {}
 
-	Vec3(T x, T y, T z) : x(x), y(y), z(z) {}
+	Vec3(T new_x, T new_y, T new_z) : x(new_x), y(new_y), z(new_z) {}
 
 	inline Vec3<T> operator+(const Vec3<T>& other) const
 	{
@@ -19,7 +19,14 @@ struct Vec3
 	inline Vec3<T> Normalized() const
 	{
 		float length = Length();
-		return Vec3(x / length, y / length, z / length);
+		if (length > -FLT_EPSILON && length < FLT_EPSILON)
+		{
+			return Vec3(x, y, z);
+		}
+		else
+		{
+			return Vec3(x / length, y / length, z / length);
+		}
 	}
 
 	inline float Length() const const
