@@ -7,7 +7,7 @@ struct Vec3
 
 	Vec3() {}
 
-	Vec3(const Vec3<T>& other) : x(other.x), y(other.y), z(other.z) {}
+	Vec3(const Vec3<T>& other) : Vec3(other.x, other.y, other.z) {}
 
 	Vec3(T new_x, T new_y, T new_z) : x(new_x), y(new_y), z(new_z) {}
 
@@ -28,7 +28,7 @@ struct Vec3
 		return Vec3(x / length, y / length, z / length);
 	}
 
-	float Length() const const
+	float Length() const
 	{
 		return sqrt(x * x + y * y + z * z);
 	}
