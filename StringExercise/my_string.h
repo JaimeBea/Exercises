@@ -10,11 +10,12 @@ public:
 	String(const char* source_chars, size_t length);
 	String(const char* source_chars);
 	String(const String& other);
-	String(String&& other) noexcept;
+	String(String&& other);
 	~String();
 
 	String operator+(const String& other) const;
 	bool operator==(const String& other) const;
+	String& operator=(String&& other);
 
 	void Clear();
 

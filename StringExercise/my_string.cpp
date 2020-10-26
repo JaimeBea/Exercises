@@ -30,7 +30,7 @@ String::String(const char* source_chars) : String(source_chars, string_length(so
 
 String::String(const String& other) : String(other.chars, other.size) {}
 
-String::String(String&& other) noexcept : chars(other.chars), size(other.size)
+String::String(String&& other) : chars(other.chars), size(other.size)
 {
 	// Clear the other string without deleting the chars
 	other.chars = &nullstring;
@@ -71,6 +71,15 @@ bool String::operator==(const String& other) const
 	}
 
 	return true;
+}
+
+String& String::operator=(String&& other)
+{
+	chars = other.chars;
+	size = other.size;
+	other.chars = &nullstring;
+	other.size = 0;
+	return *this;
 }
 
 void String::Clear()
