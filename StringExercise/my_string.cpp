@@ -1,16 +1,19 @@
 #include "my_string.h"
 
-// Static string used to avoid allocations when the string is empty
-char nullstring = '\0';
-
-size_t string_length(const char* chars)
+namespace
 {
-	size_t length = 0;
-	while (chars[length] != '\0')
+	// Static string used to avoid allocations when the string is empty
+	char nullstring = '\0';
+
+	size_t string_length(const char* chars)
 	{
-		length += 1;
+		size_t length = 0;
+		while (chars[length] != '\0')
+		{
+			length += 1;
+		}
+		return length;
 	}
-	return length;
 }
 
 String::String() : chars(&nullstring), size(0) {}
