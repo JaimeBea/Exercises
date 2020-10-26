@@ -75,11 +75,12 @@ bool String::operator==(const String& other) const
 
 String& String::operator=(String&& other)
 {
-	Clear();
+	char* temp_chars = chars;
+	size_t temp_size = size;
 	chars = other.chars;
 	size = other.size;
-	other.chars = &nullstring;
-	other.size = 0;
+	other.chars = temp_chars;
+	other.size = temp_size;
 	return *this;
 }
 
