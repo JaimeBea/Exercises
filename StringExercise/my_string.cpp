@@ -75,6 +75,7 @@ bool String::operator==(const String& other) const
 
 String& String::operator=(String&& other)
 {
+	Clear();
 	chars = other.chars;
 	size = other.size;
 	other.chars = &nullstring;
