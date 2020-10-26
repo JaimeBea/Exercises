@@ -1,6 +1,7 @@
 #include "my_string.h"
 
-char nullchar = '\0';
+// Static string used to avoid allocations when the string is empty
+char nullstring = '\0';
 
 size_t string_length(const char* chars)
 {
@@ -12,7 +13,7 @@ size_t string_length(const char* chars)
 	return length;
 }
 
-String::String() : chars(&nullchar), size(0) {}
+String::String() : chars(&nullstring), size(0) {}
 
 String::String(const char* source_chars, size_t length) : chars(new char[length + 1]), size(length)
 {
@@ -28,7 +29,8 @@ String::String(const String& other) : String(other.chars, other.size) {}
 
 String::String(String&& other) noexcept : chars(other.chars), size(other.size)
 {
-	other.chars = &nullchar;
+	// Clear the other string without deleting the chars
+	other.chars = &nullstring;
 	other.size = 0;
 }
 
@@ -70,10 +72,10 @@ bool String::operator==(const String& other) const
 
 void String::Clear()
 {
-	if (chars != &nullchar)
+	if (chars != &nullstring)
 	{
 		delete[] chars;
-		chars = &nullchar;
+		chars = &nullstring;
 	}
 	size = 0;
 }
